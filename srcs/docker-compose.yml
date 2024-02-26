@@ -1,0 +1,56 @@
+version: '3'
+
+services:
+  mariadb:
+    container_name: mariadb
+    build:
+      context: ./requirements/mariadb
+      dockerfile: Dockerfile
+      args:
+        - DB_NAME=${DB_NAME}
+        - DB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+        - DB_USER=${DB_USER}
+        - DB_PASSWORD=${DB_PASSWORD}
+    restart: on-failure
+    networks:
+      - inception-network
+    volumes:
+      - db-data:/var/lib/mysql
+    env_file:
+      - .env
+
+  wordpress:
+    container_name: wordpress
+    build:
+      context: ./requirements/wordpress
+      dockerfile: Dockerfile
+    restart: on-failure
+    networks:
+      - inception-network
+    volumes:
+      - wordpress-data:/var/www/wordpress
+    env_file:
+      - .env
+
+  nginx:
+    container_name: nginx
+    build:
+      context: ./requirements/nginx
+      dockerfile: Dockerfile
+    ports:
+      - "443:443"
+    restart: on-failure
+    networks:
+      - inception-network
+    volumes:
+      - wordpress-data:/var/www/wordpress
+    env_file:
+      - .env
+
+networks:
+  inception-network:
+    driver: bridge
+
+volumes:
+  wordpress-data:
+  db-data:
