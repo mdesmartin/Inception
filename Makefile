@@ -1,4 +1,4 @@
-PATH_TO_DATA = /home/mehdi/data
+PATH_TO_DATA = /home/mehdi/data/
 
 all:
 	$(MAKE) up
