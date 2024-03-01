@@ -55,10 +55,10 @@ volumes:
   wordpress-data:
     driver_opts:
       type: none
-      device: /home/mehdi/data
+      device: /home/mehdi/data/wordpress
       o: bind
   mariadb-data:
     driver_opts:
       type: none
-      device: /home/mehdi/data
+      device: /home/mehdi/data/mariadb
       o: bind
