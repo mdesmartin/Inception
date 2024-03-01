@@ -15,8 +15,8 @@ clean:
 	docker compose -f srcs/docker-compose.yml down --rmi local -v
 
 fclean:
-	docker compose -f srcs/docker-compose.yml down --rmi all -v \
-	# rm -rf $(PATH_TO_DATA)*
+	docker compose -f srcs/docker-compose.yml down --rmi all -v
+	rm -rf $(PATH_TO_DATA)*
 	
 
 re: fclean
